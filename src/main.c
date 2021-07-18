@@ -56,6 +56,7 @@ void main(void)
 		  GPIO_voidSetPinValue(GPIOA, PIN1, HIGH);
 	  }
 
+
     }
 }
 

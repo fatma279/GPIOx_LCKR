@@ -71,7 +71,7 @@ void GPIO_VoidSetPortDirection(u8 Copy_u8Port, u8 Copy_u8Mode);
 
 void GPIO_voidSetPortValue(u8 Copy_u8Port,u8 Copy_u8Value);
 
-u32 GPIO_VoidLockMode(u8 Copy_u8Port, u8 Copy_u8Pin);
+u32  GPIO_VoidLockMode(u8 Copy_u8Port, u8 Copy_u8Pin);
 
 
 

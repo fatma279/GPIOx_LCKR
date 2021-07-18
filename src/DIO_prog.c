@@ -226,66 +226,60 @@ void GPIO_voidSetPortValue(u8 Copy_u8Port,u8 Copy_u8Value)
 }
 
 
-u32 GPIO_VoidLockMode(u8 Copy_u8Port, u8 Copy_u8Pin)
+ u32  GPIO_VoidLockMode(u8 Copy_u8Port, u8 Copy_u8Pin)
 {
-	u32 LOC_u32RegRead = 0;
+	u32 LOC_u32RegRead=0 ;
 	
 	switch(Copy_u8Port)
 	{
 	   case GPIOA :   
 	   /* LOCK key writing sequence:
-          Write 1 in Lock key*/
-	       SET_BIT(DIOA_LCKR ,16);
+          Write 1 in Lock key without change LCK[15:0]*/
+		   LOC_u32RegRead = (1<<16)|(1<<Copy_u8Pin);
+		   DIOA_LCKR = LOC_u32RegRead;
 
-		   /* Write 0 in Lock key*/
-	       CLR_BIT(DIOA_LCKR ,16);
+		   /* Write 1 in PORTA lock bit while Lock key is ZERO*/
+		   DIOA_LCKR =(1<<Copy_u8Pin);
 
-		   /* Write 1 in PORTA lock bit while Lock key is ZERO */		   
-		   DIOA_LCKR = (1 << (Copy_u8Pin));
-		   
-		   /* Write 1 in Lock key*/
-	       SET_BIT(DIOA_LCKR ,16);
+		   /* Write 1 in Lock key without change LCK[15:0]*/
+		   DIOA_LCKR = LOC_u32RegRead;
 		   
 		   /* Read Lock key*/
 		   LOC_u32RegRead = DIOA_LCKR;
 			break;
 
+
 	   case GPIOB:
-	   /* LOCK key writing sequence:
-          Write 1 in Lock key*/
-	       SET_BIT(DIOB_LCKR ,16);
+		   /* LOCK key writing sequence:
+	          Write 1 in Lock key without change LCK[15:0]*/
+			   LOC_u32RegRead = (1<<16)|(1<<Copy_u8Pin);
+			   DIOB_LCKR = LOC_u32RegRead;
 
-		   /* Write 0 in Lock key*/		   
-	       CLR_BIT(DIOB_LCKR ,16);
+			   /* Write 1 in PORTB lock bit while Lock key is ZERO*/
+			   DIOB_LCKR =(1<<Copy_u8Pin);
 
-		   /* Write 1 in PORTB lock bit while Lock key is ZERO */		   
-		   DIOB_LCKR = (1 << (Copy_u8Pin));
-		   
-		   /* Write 1 in Lock key*/
-	       SET_BIT(DIOB_LCKR ,16);
+			   /* Write 1 in Lock key without change LCK[15:0]*/
+			   DIOB_LCKR = LOC_u32RegRead;
 
-		   /* Read Lock key*/
-		   LOC_u32RegRead = DIOB_LCKR;
-			break;
+			   /* Read Lock key*/
+			   LOC_u32RegRead = DIOB_LCKR;
+				break;
 			
 	   case GPIOC:
-	   /* LOCK key writing sequence:
-          Write 1 in Lock key*/
-	       SET_BIT(DIOC_LCKR ,16);
-		   
-		   /* Write 0 in Lock key*/			   
-	       CLR_BIT(DIOC_LCKR ,16);
-		   
-		   /* Write 1 in PORTC lock bit while Lock key is ZERO */		   
-		   DIOC_LCKR = (1 << (Copy_u8Pin));
-		   
-		   /* Write 1 in Lock key*/
-	       SET_BIT(DIOC_LCKR ,16);
+		   /* LOCK key writing sequence:
+	          Write 1 in Lock key without change LCK[15:0]*/
+			   LOC_u32RegRead = (1<<16)|(1<<Copy_u8Pin);
+			   DIOC_LCKR = LOC_u32RegRead;
 
-		   /* Read Lock key*/
-		   LOC_u32RegRead = DIOC_LCKR;
+			   /* Write 1 in PORTC lock bit while Lock key is ZERO*/
+			   DIOC_LCKR =(1<<Copy_u8Pin);
 
-			break;
+			   /* Write 1 in Lock key without change LCK[15:0]*/
+			   DIOC_LCKR = LOC_u32RegRead;
+
+			   /* Read Lock key*/
+			   LOC_u32RegRead = DIOC_LCKR;
+				break;
 	}
 
 	return LOC_u32RegRead;
